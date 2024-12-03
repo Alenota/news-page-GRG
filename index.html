@@ -9,28 +9,71 @@
 <body>
     <header>
         <h1>Новости о недвижимости</h1>
+        <div class="filter">
+            <label for="filter">Фильтровать:</label>
+            <select id="filter" onchange="filterNews()">
+                <option value="all">Все</option>
+                <option value="new">Новые</option>
+                <option value="old">Старые</option>
+            </select>
+        </div>
     </header>
 
-    <div class="container">
-        <div class="news-item">
-            <h2>Как выбрать идеальную квартиру?</h2>
-            <p>Пошаговое руководство по выбору недвижимости в 2024 году.</p>
-            <a href="#" class="btn">Подробнее</a>
+    <div class="container" id="news-container">
+        <div class="news-item" data-date="2024-12-03">
+            <img src="https://svoi.vc/wp-content/uploads/2023/05/venchurnye-investory-rossii-prev.jpg" alt="Квартира" class="news-image">
+            <div class="news-content">
+                <h2>Как выбрать идеальную квартиру?</h2>
+                <p>Пошаговое руководство по выбору недвижимости в 2024 году.</p>
+                <p class="date">Дата публикации: 2024-12-03</p>
+                <a href="#" class="btn">Подробнее</a>
+            </div>
         </div>
-        <div class="news-item">
-            <h2>Новые тенденции на рынке недвижимости</h2>
-            <p>Аналитика и прогнозы на ближайшие годы.</p>
-            <a href="#" class="btn">Подробнее</a>
+        <div class="news-item" data-date="2024-11-25">
+            <img src="https://www.dcregionrealestate.com/wp-content/uploads/2013/09/market_report_featured1.jpg" alt="Рынок недвижимости" class="news-image">
+            <div class="news-content">
+                <h2>Новые тенденции на рынке недвижимости</h2>
+                <p>Аналитика и прогнозы на ближайшие годы.</p>
+                <p class="date">Дата публикации: 2024-11-25</p>
+                <a href="#" class="btn">Подробнее</a>
+            </div>
         </div>
-        <div class="news-item">
-            <h2>Обзор лучших районов для жизни</h2>
-            <p>Топ-5 районов с лучшими условиями для жизни.</p>
-            <a href="#" class="btn">Подробнее</a>
+        <div class="news-item" data-date="2024-10-15">
+            <img src="https://avatars.mds.yandex.net/get-altay/10637174/2a0000018a317a7e0c3e187bce3432ab2e65/XXL_height" alt="Районы для жизни" class="news-image">
+            <div class="news-content">
+                <h2>Обзор лучших районов для жизни</h2>
+                <p>Топ-5 районов с лучшими условиями для жизни.</p>
+                <p class="date">Дата публикации: 2024-10-15</p>
+                <a href="#" class="btn">Подробнее</a>
+            </div>
         </div>
     </div>
 
     <footer>
         © 2024 Greenman Realty Group. Все права защищены.
     </footer>
+
+    <script>
+        function filterNews() {
+            const filterValue = document.getElementById('filter').value;
+            const newsItems = document.querySelectorAll('.news-item');
+            
+            newsItems.forEach(item => {
+                const date = new Date(item.getAttribute('data-date'));
+                const today = new Date();
+                const daysDiff = (today - date) / (1000 * 3600 * 24);
+                
+                if (filterValue === 'new' && daysDiff <= 30) {
+                    item.style.display = 'flex';
+                } else if (filterValue === 'old' && daysDiff > 30) {
+                    item.style.display = 'flex';
+                } else if (filterValue === 'all') {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
